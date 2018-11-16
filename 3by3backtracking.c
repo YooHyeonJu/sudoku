@@ -103,11 +103,11 @@ int main(void)
 	array[1][1] = 5;
 	array[1][2] = 6;
 	array[2][0] = 7;
-	array[2][1] = 8;
+	//array[2][1] = 8;
 	
 	tracking(1);
 
-	printf("%d", cnt);
+	printf("%d\n", cnt);
 
 	return 0;
 }
