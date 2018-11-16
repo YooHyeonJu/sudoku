@@ -70,7 +70,7 @@ void tracking(int _data)
 				{
 					array[i][j] = _data;
 
-					if (_data == 9)
+					if (filledAll() == 1)
 					{
 						cnt += 1;
 						showSolution();
@@ -79,16 +79,12 @@ void tracking(int _data)
 					tracking(_data + 1);
 
 					array[i][j] = 0;
-				}
+				}				
 				else
 				{
-					if (_data == 9)
-					{
-						cnt += 1;
-						showSolution();
-					}
 					tracking(_data + 1);
 				}
+				
 			}
 		}
 	}
@@ -96,18 +92,19 @@ void tracking(int _data)
 
 int main(void)
 {
-	array[0][0] = 1;
-	array[0][1] = 2;
+	//array[0][0] = 1;
+	//array[0][1] = 2;
 	array[0][2] = 3;
 	array[1][0] = 4;
 	array[1][1] = 5;
 	array[1][2] = 6;
 	array[2][0] = 7;
-	//array[2][1] = 8;
-	
+	array[2][1] = 8;
+	array[2][2] = 9;
+
 	tracking(1);
 
-	printf("%d\n", cnt);
+	printf("%d", cnt);
 
 	return 0;
 }
