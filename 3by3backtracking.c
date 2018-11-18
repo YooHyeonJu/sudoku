@@ -74,7 +74,6 @@ void tracking(int _data)
 					if (_data == 9)
 					{
 						cnt += 1;
-						printf("_data == 9\n");
 						showSolution();
 					}
 
@@ -90,7 +89,6 @@ void tracking(int _data)
 		if (_data == 9)
 		{
 			cnt += 1;
-			printf("_data == 9\n");
 			showSolution();
 			return;
 		}
