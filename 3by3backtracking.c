@@ -60,51 +60,59 @@ int cnt = 0;
 
 void tracking(int _data)
 {
-	for (int i = 0; i < SZ; i++)
+
+	if (isThereValue(_data) == 0)
 	{
-		for (int j = 0; j < SZ; j++)
+		for (int i = 0; i < SZ; i++)
 		{
-			if (array[i][j] == 0)
-			{
-				if (isThereValue(_data) == 0)
+			for (int j = 0; j < SZ; j++)
+			{				
+				if (array[i][j] == 0)
 				{
 					array[i][j] = _data;
 
-					if (filledAll() == 1)
+					if (_data == 9)
 					{
 						cnt += 1;
+						printf("_data == 9\n");
 						showSolution();
 					}
 
 					tracking(_data + 1);
 
 					array[i][j] = 0;
-				}				
-				else
-				{
-					tracking(_data + 1);
 				}
-				
 			}
 		}
+	}
+	else
+	{
+		if (_data == 9)
+		{
+			cnt += 1;
+			printf("_data == 9\n");
+			showSolution();
+			return;
+		}
+		tracking(_data + 1);
 	}
 }
 
 int main(void)
 {
 	//array[0][0] = 1;
-	//array[0][1] = 2;
+	array[0][1] = 2;
 	array[0][2] = 3;
 	array[1][0] = 4;
-	array[1][1] = 5;
+	//array[1][1] = 5;
 	array[1][2] = 6;
 	array[2][0] = 7;
 	array[2][1] = 8;
-	array[2][2] = 9;
+	//array[2][2] = 9;
 
 	tracking(1);
 
-	printf("%d", cnt);
+	printf("%d\n", cnt);
 
 	return 0;
 }
