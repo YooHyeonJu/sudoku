@@ -5,6 +5,7 @@
 #define SZ 9
 
 int array[SZ][SZ];
+int temp[SZ];
 
 void showSolution()
 {
@@ -28,8 +29,18 @@ void showSolution()
 	printf("+-----------------------+\n\n\n");
 }
 
+void putNum2Array(char *buf,int _row)
+{
+	for(int i = 0;i<SZ;i++)
+	{
+		array[_row][i] = atoi(&buf[2*i]);
+
+	}
+}
+
 int main(void)
 {
+	int row = 0;
 	int level = 0;
 	printf("Choice the Level(1,2,3)\n");
 	scanf("%d",&level);
@@ -53,8 +64,11 @@ int main(void)
 	while(!feof(f))
 	{
 		fgets(buf,99,f);
-		printf("%s",buf);
+		putNum2Array(buf,row);
+		row+=1;
+		
 	}
+	showSolution();
 
 	return 0;
 }
