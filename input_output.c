@@ -5,7 +5,6 @@
 #define SZ 9
 
 int array[SZ][SZ];
-int temp[SZ];
 
 void showSolution()
 {
