@@ -27,6 +27,7 @@ printf("Result> \x1b[44m\x1b[32m칼라로 나타내고 싶은 메시지\x1b[0m\n
 printf("\n");
 
 printf("\x1b[31m" "HI\n");
+printf("\x1b[0m" "bye\n");
 
 exit(0);
 }
