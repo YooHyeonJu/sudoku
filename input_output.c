@@ -4,7 +4,13 @@
 
 #define SZ 9
 
+#define WHITE	"\x1b[0m"	// 0
+#define RED	"\x1b[31m"	// 1
+#define BLUE	"\x1b[34m"	// 2
+
 int array[SZ][SZ];
+
+int color[SZ][SZ];
 
 void showSolution()
 {
@@ -21,7 +27,7 @@ void showSolution()
 			{
 				printf("| ");
 			}
-			printf("%d ", array[i][j]);
+			printf(WHITE "%d ", array[i][j]);
 		}
 		printf("|\n");
 	}
@@ -33,11 +39,10 @@ void putNum2Array(char *buf,int _row)
 	for(int i = 0;i<SZ;i++)
 	{
 		array[_row][i] = atoi(&buf[2*i]);
-
 	}
 }
 
-int main(void)
+void get_data()
 {
 	int row = 0;
 	int level = 0;
@@ -67,6 +72,11 @@ int main(void)
 		row+=1;
 		
 	}
+}
+
+int main(void)
+{
+	get_data();
 	showSolution();
 
 	return 0;
