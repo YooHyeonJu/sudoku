@@ -23,8 +23,25 @@ void initReadOnlySudoku(void)
  memcpy(&readOnlySudoku, sudoku, SZ*SZ*sizeof(int));
 }
 
+void solveSudoku(int _r, int _c)
+{
+ if(sudoku[_r][_c] > 0)
+ {
+  //checkNextNum function
+  return 0;
+ }
+ else
+ {
+  for(int i=1; i<=9; i++)
+  {
+   //isOK function
+  }
+ }
+}
+
 int main(void)
 {
+ initReadOnlySudoku();
  printf("you are success!! this is sudoku\n");
  for(int i=0; i<SZ; i++)
  {
@@ -32,6 +49,6 @@ int main(void)
   {
    printf("%d ", sudoku[i][j]);
   }printf("\n");
- }
+ } // check operation
  return 0;
 }
