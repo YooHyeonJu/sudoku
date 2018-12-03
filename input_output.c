@@ -8,9 +8,55 @@
 #define RED	"\x1b[31m"	// 1
 #define BLUE	"\x1b[34m"	// 2
 
-int array[SZ][SZ];
 
+int array[SZ][SZ];
 int color[SZ][SZ];
+
+int checkHorizontal(int _data, int _row,int _col)
+{
+	for (int i = 0; i < SZ; i++)
+	{
+		if (array[_row][i] == _data)
+		{
+			color[_row][i] = 1;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int checkVertical(int _data, int _row,int _col)
+{
+	for (int i = 0; i < SZ; i++)
+	{
+		if (array[i][_col] == _data)
+		{
+			color[i][_col] = 1;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int checkSquare(int _data, int _row, int _col)
+{
+	int h = _row / 3;
+	int v = _col / 3;
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (array[3*h + i][3*v + j] == _data)
+			{
+				color[3*h + i][3*v + j] = 1;
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+
 
 void showSolution()
 {
@@ -27,7 +73,10 @@ void showSolution()
 			{
 				printf("| ");
 			}
-			printf(WHITE "%d ", array[i][j]);
+			if(color[i][j] == 0)
+				printf(WHITE "%d ", array[i][j]);
+			else
+				printf(RED "%d ", array[i][j]);
 		}
 		printf("|\n");
 	}
@@ -39,6 +88,7 @@ void putNum2Array(char *buf,int _row)
 	for(int i = 0;i<SZ;i++)
 	{
 		array[_row][i] = atoi(&buf[2*i]);
+		color[_row][i] = 0;
 	}
 }
 
@@ -74,10 +124,50 @@ void get_data()
 	}
 }
 
+int full()
+{
+	for(int i = 0;i<SZ;i++)
+	{
+		for(int j = 0;j<SZ;j++)
+		{
+			if(array[i][j]==0)
+				return 0;
+		}
+	}
+	return 1;
+}
+
+void getNumber()
+{
+	int num=0,col=0,row=0;
+	while(1)
+	{
+		if(full() == 1)
+		{
+			showSolution();
+			return;
+		}
+		scanf("%d %d %d",&row,&col,&num);
+		printf("row=%d, col=%d, num=%d\n",row,col,num);
+		row-=1; col-=1;
+		if(checkHorizontal(num,row,col)==1 || checkVertical(num,row,col)==1 || checkSquare(num,row,col)==1)
+		{
+			showSolution();
+		}
+		else
+		{
+			array[row][col]=num;
+			showSolution();
+		}
+	}
+}
+
+
 int main(void)
 {
 	get_data();
 	showSolution();
+	getNumber();
 
 	return 0;
 }
