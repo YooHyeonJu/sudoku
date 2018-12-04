@@ -16,9 +16,10 @@ int checkHorizontal(int _data, int _row,int _col)
 {
 	for (int i = 0; i < SZ; i++)
 	{
-		if (array[_row][i] == _data)
+		if (array[_row][i] == _data && i!=_col)
 		{
 			color[_row][i] = 1;
+			printf("Horizontal\n");
 			return 1;
 		}
 	}
@@ -29,9 +30,10 @@ int checkVertical(int _data, int _row,int _col)
 {
 	for (int i = 0; i < SZ; i++)
 	{
-		if (array[i][_col] == _data)
+		if (array[i][_col] == _data && i!=_row)
 		{
 			color[i][_col] = 1;
+			printf("Vertical\n");
 			return 1;
 		}
 	}
@@ -50,6 +52,7 @@ int checkSquare(int _data, int _row, int _col)
 			if (array[3*h + i][3*v + j] == _data)
 			{
 				color[3*h + i][3*v + j] = 1;
+				printf("Square\n");
 				return 1;
 			}
 		}
@@ -64,23 +67,23 @@ void showSolution()
 	{
 		if (i % 3 == 0)
 		{
-			printf("+-----------------------+\n");
+			printf(WHITE "+-----------------------+\n");
 		}
 
 		for (int j = 0; j < SZ; j++)
 		{
 			if (j % 3 == 0)
 			{
-				printf("| ");
+				printf(WHITE "| ");
 			}
-			if(color[i][j] == 0)
-				printf(WHITE "%d ", array[i][j]);
-			else
-				printf(RED "%d ", array[i][j]);
+			if(color[i][j] == 1)
+			{	printf(RED "%d ", array[i][j]);}
+			else 
+			{	printf(WHITE "%d ", array[i][j]);}
 		}
 		printf("|\n");
 	}
-	printf("+-----------------------+\n\n\n");
+	printf(WHITE "+-----------------------+\n\n\n");
 }
 
 void putNum2Array(char *buf,int _row)
@@ -150,15 +153,14 @@ void getNumber()
 		scanf("%d %d %d",&row,&col,&num);
 		printf("row=%d, col=%d, num=%d\n",row,col,num);
 		row-=1; col-=1;
-		if(checkHorizontal(num,row,col)==1 || checkVertical(num,row,col)==1 || checkSquare(num,row,col)==1)
-		{
-			showSolution();
-		}
-		else
+
+		if(checkHorizontal(num,row,col)==0 || checkVertical(num,row,col)==0 || checkSquare(num,row,col)==0)
 		{
 			array[row][col]=num;
-			showSolution();
 		}
+		
+		showSolution();
+
 	}
 }
 
