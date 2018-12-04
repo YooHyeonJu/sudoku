@@ -19,7 +19,6 @@ int checkHorizontal(int _data, int _row,int _col)
 		if (array[_row][i] == _data && i!=_col)
 		{
 			color[_row][i] = 1;
-			printf("Horizontal\n");
 			return 1;
 		}
 	}
@@ -33,7 +32,6 @@ int checkVertical(int _data, int _row,int _col)
 		if (array[i][_col] == _data && i!=_row)
 		{
 			color[i][_col] = 1;
-			printf("Vertical\n");
 			return 1;
 		}
 	}
@@ -52,7 +50,6 @@ int checkSquare(int _data, int _row, int _col)
 			if (array[3*h + i][3*v + j] == _data)
 			{
 				color[3*h + i][3*v + j] = 1;
-				printf("Square\n");
 				return 1;
 			}
 		}
