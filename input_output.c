@@ -60,13 +60,14 @@ int checkSquare(int _data, int _row, int _col)
 
 void showSolution()
 {
+	printf(WHITE "    1 2 3   4 5 6   7 8 9  \n");
 	for (int i = 0; i < SZ; i++)
 	{
 		if (i % 3 == 0)
 		{
-			printf(WHITE "+-----------------------+\n");
+			printf(WHITE "  +-----------------------+\n");
 		}
-
+		printf(WHITE "%d ",i+1);
 		for (int j = 0; j < SZ; j++)
 		{
 			if (j % 3 == 0)
@@ -74,13 +75,17 @@ void showSolution()
 				printf(WHITE "| ");
 			}
 			if(color[i][j] == 1)
-			{	printf(RED "%d ", array[i][j]);}
+			{
+				printf(RED "%d ", array[i][j]);
+			}
 			else 
-			{	printf(WHITE "%d ", array[i][j]);}
+			{	
+				printf(WHITE "%d ", array[i][j]);
+			}
 		}
 		printf("|\n");
 	}
-	printf(WHITE "+-----------------------+\n\n\n");
+	printf(WHITE "  +-----------------------+\n\n\n");
 }
 
 void putNum2Array(char *buf,int _row)
@@ -137,6 +142,29 @@ int full()
 	return 1;
 }
 
+int checkRange(int row, int col, int num)
+{
+	if(row<1 || row>9)
+	{
+		printf(RED "ROW" WHITE" is out of range!!\n\n");
+		return 1;
+	}
+
+	if(col<1 || col>9)
+	{
+		printf(RED "COL" WHITE" is out of range!!\n\n");
+		return 1;
+	}
+
+	if(num<1 || num>9)
+	{
+		printf(RED "NUMBER" WHITE" is out of range!!\n\n");
+		return 1;
+	}
+	
+	return 0;
+}
+
 void getNumber()
 {
 	int num=0,col=0,row=0;
@@ -147,17 +175,31 @@ void getNumber()
 			showSolution();
 			return;
 		}
+		printf("row, column, num : ");
 		scanf("%d %d %d",&row,&col,&num);
-		printf("row=%d, col=%d, num=%d\n",row,col,num);
+
+		int ret = checkRange(row,col,num);
+		if(ret == 1)
+		{
+			continue;
+		}
+
 		row-=1; col-=1;
 
-		if(checkHorizontal(num,row,col)==0 || checkVertical(num,row,col)==0 || checkSquare(num,row,col)==0)
+
+		if(array[row][col] !=0)
+		{
+			printf("Number is already exist!!\n");
+			continue;
+		}
+
+		if(checkHorizontal(num,row,col)==0 && checkVertical(num,row,col)==0 && checkSquare(num,row,col)==0)
 		{
 			array[row][col]=num;
 		}
 		
 		showSolution();
-
+		memset(color,0,sizeof(int)*SZ*SZ);
 	}
 }
 
