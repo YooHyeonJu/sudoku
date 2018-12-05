@@ -16,7 +16,7 @@ int checkHorizontal(int _data, int _row,int _col)
 {
 	for (int i = 0; i < SZ; i++)
 	{
-		if (array[_row][i] == _data && i!=_col)
+		if (array[_row][i] == _data)
 		{
 			color[_row][i] = 1;
 			return 1;
@@ -29,7 +29,7 @@ int checkVertical(int _data, int _row,int _col)
 {
 	for (int i = 0; i < SZ; i++)
 	{
-		if (array[i][_col] == _data && i!=_row)
+		if (array[i][_col] == _data)
 		{
 			color[i][_col] = 1;
 			return 1;
@@ -83,7 +83,7 @@ void showSolution()
 				printf(WHITE "%d ", array[i][j]);
 			}
 		}
-		printf("|\n");
+		printf(WHITE "|\n");
 	}
 	printf(WHITE "  +-----------------------+\n\n\n");
 }
@@ -192,11 +192,18 @@ void getNumber()
 			printf("Number is already exist!!\n");
 			continue;
 		}
-
-		if(checkHorizontal(num,row,col)==0 && checkVertical(num,row,col)==0 && checkSquare(num,row,col)==0)
+		else
 		{
-			array[row][col]=num;
+			int ret1 = checkHorizontal(num,row,col);
+			int ret2 = checkVertical(num,row,col);
+			int ret3 = checkSquare(num,row,col);
+			
+			if(ret1 == 0 && ret2 == 0 && ret3 == 0)
+			{
+				array[row][col]=num;
+			}
 		}
+		
 		
 		showSolution();
 		memset(color,0,sizeof(int)*SZ*SZ);
