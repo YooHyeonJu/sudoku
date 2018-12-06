@@ -53,9 +53,29 @@ void solveSudoku(int _r, int _c)
  {
   for(int i=1; i<=9; i++)
   {
-   //isOK function
+   memcpy(&sudoku[_r][_c], &readOnlySudoku[_r][_c], sizeof(int)*SZ*SZ - sizeof(int)*(_r*SZ+_c));
+   if (isOk(_r, _c, i) == 1)
+   {
+	sudoku[_r][_c] =i;
+   }
   }
  }
+}
+
+void checkNext(int _r, int _c)
+{
+ if(_r == (SZ-1) && _c == (SZ-1))
+ {
+  printSoultion();
+  return;
+ } _c++;
+
+ if(_c == SZ)
+ {
+  _c = 0;
+  r++;
+ }
+ solveSudoku(_r, _c);
 }
 
 int main(void)
