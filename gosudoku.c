@@ -23,12 +23,31 @@ void initReadOnlySudoku(void)
  memcpy(&readOnlySudoku, sudoku, SZ*SZ*sizeof(int));
 }
 
+int isOK(int _r, int _c, int _value)
+{
+ for (int i=0; i<SZ; i++)
+ {
+	if (sudoku[i][_c] == _value && i != _r)
+	{
+	 return 0;
+	}
+ }
+ for (int i=0; i<SZ; i++)
+ {
+	if(sudoku[_r][i] == _value && i != _c)
+	{
+	 return 0;
+	}
+ }
+ 
+}
+
 void solveSudoku(int _r, int _c)
 {
  if(sudoku[_r][_c] > 0)
  {
   //checkNextNum function
-  return 0;
+ // return 0;
  }
  else
  {
