@@ -17,10 +17,26 @@ int sudoku[SZ][SZ] =
 //after change
 
 int readOnlySudoku[SZ][SZ];
+int solutionCnt = 0;
+
 
 void initReadOnlySudoku(void)
 {
  memcpy(&readOnlySudoku, sudoku, SZ*SZ*sizeof(int));
+}
+
+
+void printSolution(void)
+{
+ solutioncnt++;
+ printf("----This is Solution # %d ---\n", solutionCnt);
+ for(int i=0; i<SZ; i++)
+ {
+  for(int j=0; j<SZ; j++)
+  {
+	printf("%d ", sudoku[i][j]);
+  } printf("\n");
+ }
 }
 
 //int checkalreadyUDLR(int _r, int _c, int _value)
@@ -45,7 +61,7 @@ int isOK(int _r, int _c, int _value)
 
  for (int i = region_row*3; i<= region_row*3+2; i++)
  {
-        for(int j = region_col*3; j<=region*3+2; j++)
+        for(int j = region_col*3; j<=region_col*3+2; j++)
         {
          if(sudoku[i][j] == _value && i != _r && j != _c)
          {
