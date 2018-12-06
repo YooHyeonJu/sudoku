@@ -1,6 +1,6 @@
 exe_sudoku : sudoku.o
 	gcc -o exe_sudoku -L. sudoku.o -lfuncs
- 
+
 sudoku.o : sudoku.c
 	gcc -c -I. sudoku.c -o sudoku.o
 
@@ -13,3 +13,4 @@ input_output.o : input_output.c
 clean:
 	rm -f input_output
 	rm -f *.o 
+	rm -f libfuncs.a

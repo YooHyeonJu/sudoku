@@ -211,5 +211,14 @@ void getNumber()
 	}
 }
 
+/*
+int main(void)
+{
+	get_data();
+	showSolution();
+	getNumber();
 
+	return 0;
+}
 
+*/
