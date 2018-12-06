@@ -4,7 +4,7 @@
 #include "alheader.h"
 
 void solveSudoku(int _r, int _c);
-
+/*
 int sudoku[SZ][SZ] =
 {
  2,0,5,0,0,7,0,0,6,
@@ -18,6 +18,7 @@ int sudoku[SZ][SZ] =
  3,0,0,4,0,0,5,0,8
 };
 //after change
+*/
 
 int readOnlySudoku[SZ][SZ];
 int solutionCnt = 0;
@@ -137,20 +138,10 @@ void solveSudoku(int _r, int _c)
   }
  }
 }
-
+/*
 int main(void)
 {
  initReadOnlySudoku();
- /*
- printf("you are success!! this is sudoku\n");
- for(int i=0; i<SZ; i++)
- {
-  for (int j=0; j<SZ; j++)
-  {
-   printf("%d ", sudoku[i][j]);
-  }printf("\n");
- } // check operation
- */
  solveSudoku(0, 0);
  return 0;
-}
+}*/
