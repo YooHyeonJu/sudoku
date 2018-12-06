@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #define SZ 9
+#include "alheader.h"
+
 
 int sudoku[SZ][SZ] =
 {
@@ -28,7 +30,7 @@ void initReadOnlySudoku(void)
 
 void printSolution(void)
 {
- solutioncnt++;
+ solutionCnt++;
  printf("----This is Solution # %d ---\n", solutionCnt);
  for(int i=0; i<SZ; i++)
  {
@@ -40,7 +42,7 @@ void printSolution(void)
 }
 
 //int checkalreadyUDLR(int _r, int _c, int _value)
-int isOK(int _r, int _c, int _value)
+int isOK (int _r, int _c, int _value)
 {
  for (int i=0; i<SZ; i++)
  {
@@ -97,15 +99,15 @@ void solveSudoku(int _r, int _c)
 {
  if(sudoku[_r][_c] > 0)
  {
-  //checkNextNum function
- // return 0;
+  checkNext(_r, _c);
+  //return 0;
  }
  else
  {
   for(int i=1; i<=9; i++)
   {
    memcpy(&sudoku[_r][_c], &readOnlySudoku[_r][_c], sizeof(int)*SZ*SZ - sizeof(int)*(_r*SZ+_c));
-   if (isOk(_r, _c, i) == 1)
+   if ( isOK (_r, _c, i) == 1)
    {
 	sudoku[_r][_c] =i;
    }
@@ -117,14 +119,14 @@ void checkNext(int _r, int _c)
 {
  if(_r == (SZ-1) && _c == (SZ-1))
  {
-  printSoultion();
+  printSolution();
   return;
  } _c++;
 
  if(_c == SZ)
  {
   _c = 0;
-  r++;
+  _r++;
  }
  solveSudoku(_r, _c);
 }
