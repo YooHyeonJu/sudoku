@@ -7,8 +7,9 @@
 
 #define SZ 9
 
-extern int array[SZ][SZ];
-
+extern int sudoku[SZ][SZ];
+extern int color[SZ][SZ];
+extern int readOnlySudoku[SZ][SZ];
 
 
 #define WHITE	"\x1b[0m"	// 0
@@ -19,7 +20,6 @@ extern int array[SZ][SZ];
 
 int main(void)
 {
-	printf("%d !!",array[0][0]);
 	get_data();
 	showSolution();
 	getNumber();

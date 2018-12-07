@@ -1,4 +1,4 @@
-exe_sudoku : sudoku.o
+exe_sudoku : sudoku.o input_output.o
 	gcc -o exe_sudoku sudoku.o input_output.o
 
 input_output.o : input_output.c
