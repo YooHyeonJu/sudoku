@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
 #include "input_output.h"
 #include "alheader.h"
 
@@ -9,19 +8,16 @@
 
 #define WHITE	"\x1b[0m"	// 0
 #define RED	"\x1b[31m"	// 1
-#define BLUE	"\x1b[34m"	// 2
-
-
-extern int readOnlySudoku[SZ][SZ];
 
 int sudoku[SZ][SZ];
+int array[SZ][SZ];
 int color[SZ][SZ];
 
 int checkHorizontal(int _data, int _row,int _col)
 {
 	for (int i = 0; i < SZ; i++)
 	{
-		if (sudoku[_row][i] == _data)
+		if (array[_row][i] == _data)
 		{
 			color[_row][i] = 1;
 			return 1;
@@ -29,12 +25,11 @@ int checkHorizontal(int _data, int _row,int _col)
 	}
 	return 0;
 }
-
 int checkVertical(int _data, int _row,int _col)
 {
 	for (int i = 0; i < SZ; i++)
 	{
-		if (sudoku[i][_col] == _data)
+		if (array[i][_col] == _data)
 		{
 			color[i][_col] = 1;
 			return 1;
@@ -42,7 +37,6 @@ int checkVertical(int _data, int _row,int _col)
 	}
 	return 0;
 }
-
 int checkSquare(int _data, int _row, int _col)
 {
 	int h = _row / 3;
@@ -51,7 +45,7 @@ int checkSquare(int _data, int _row, int _col)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (sudoku[3*h + i][3*v + j] == _data)
+			if (array[3*h + i][3*v + j] == _data)
 			{
 				color[3*h + i][3*v + j] = 1;
 				return 1;
@@ -60,10 +54,9 @@ int checkSquare(int _data, int _row, int _col)
 	}
 	return 0;
 }
-
 void showSolution()
 {
-	printf(WHITE "    1 2 3   4 5 6   7 8 9  \n");
+	printf(WHITE "    1 2 3   4 5 6   7 8 9\n");
 	for (int i = 0; i < SZ; i++)
 	{
 		if (i % 3 == 0)
@@ -79,18 +72,17 @@ void showSolution()
 			}
 			if(color[i][j] == 1)
 			{
-				printf(RED "%d ", sudoku[i][j]);
+				printf(RED "%d ", array[i][j]);
 			}
 			else 
 			{	
-				printf(WHITE "%d ", sudoku[i][j]);
+				printf(WHITE "%d ", array[i][j]);
 			}
 		}
 		printf(WHITE "|\n");
 	}
 	printf(WHITE "  +-----------------------+\n\n\n");
 }
-
 void putNum2Array(char *buf,int _row)
 {
 	for(int i = 0;i<SZ;i++)
@@ -98,8 +90,8 @@ void putNum2Array(char *buf,int _row)
 		sudoku[_row][i] = atoi(&buf[2*i]);
 		color[_row][i] = 0;
 	}
+	memcpy(array,sudoku,sizeof(int)*SZ*SZ);
 }
-
 void get_data()
 {
 	int row = 0;
@@ -128,20 +120,18 @@ void get_data()
 		
 	}
 }
-
 int full()
 {
 	for(int i = 0;i<SZ;i++)
 	{
 		for(int j = 0;j<SZ;j++)
 		{
-			if(sudoku[i][j]==0)
+			if(array[i][j]==0)
 				return 0;
 		}
 	}
 	return 1;
 }
-
 int checkRange(int row, int col, int num)
 {
 	if(row<1 || row>9)
@@ -163,6 +153,21 @@ int checkRange(int row, int col, int num)
 	return 0;
 }
 
+int isItCorrect()
+{
+	for(int i =0;i<SZ;i++)
+	{
+		for(int j =0;j<SZ;j++)
+		{
+			if(sudoku[i][j] != array[i][j])
+			{
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
 void getNumber()
 {
 	int num=0,col=0,row=0;
@@ -171,17 +176,26 @@ void getNumber()
 		if(full() == 1)
 		{
 			showSolution();
+			int cor_ret = isItCorrect();
+			if(cor_ret == 1)
+			{
+				printf(WHITE "YOU ARE SMART!!!\n");
+			}
+			else
+			{
+				printf(WHITE "YOUR ANSWER IS WRONG\n");
+			}
 			return;
 		}
-		printf("row, column, num : ");
-		scanf("%d %d %d",&row,&col,&num);
+		printf(WHITE "row, column, num : ");
+		scanf(WHITE "%d %d %d\n",&row,&col,&num);
 		int ret = checkRange(row,col,num);
 		if(ret == 1)
 		{
 			continue;
 		}
 		row-=1; col-=1;
-		if(sudoku[row][col] !=0)
+		if(array[row][col] !=0)
 		{
 			printf(RED "Number is already exist!!\n");
 			continue;
@@ -194,7 +208,7 @@ void getNumber()
 			
 			if(ret1 == 0 && ret2 == 0 && ret3 == 0)
 			{
-				sudoku[row][col]=num;
+				array[row][col]=num;
 			}
 		}
 		
