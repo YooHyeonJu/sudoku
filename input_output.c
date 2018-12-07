@@ -9,9 +9,24 @@
 #define WHITE	"\x1b[0m"	// 0
 #define RED	"\x1b[31m"	// 1
 
+extern int answer[SZ][SZ];
+
 int sudoku[SZ][SZ];
 int array[SZ][SZ];
 int color[SZ][SZ];
+
+void show()
+{
+	for(int i=0;i<SZ;i++)
+	{
+		for(int j =0;j<SZ;j++)
+		{
+			printf("%d ",answer[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
 
 int checkHorizontal(int _data, int _row,int _col)
 {
@@ -54,6 +69,23 @@ int checkSquare(int _data, int _row, int _col)
 	}
 	return 0;
 }
+
+
+int isItCorrect()
+{
+	for(int i =0;i<SZ;i++)
+	{
+		for(int j =0;j<SZ;j++)
+		{
+			if(answer[i][j] != array[i][j])
+			{
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
 void showSolution()
 {
 	printf(WHITE "    1 2 3   4 5 6   7 8 9\n");
@@ -83,6 +115,7 @@ void showSolution()
 	}
 	printf(WHITE "  +-----------------------+\n\n\n");
 }
+
 void putNum2Array(char *buf,int _row)
 {
 	for(int i = 0;i<SZ;i++)
@@ -92,6 +125,7 @@ void putNum2Array(char *buf,int _row)
 	}
 	memcpy(array,sudoku,sizeof(int)*SZ*SZ);
 }
+
 void get_data()
 {
 	int row = 0;
@@ -101,7 +135,8 @@ void get_data()
 	FILE *f = 0;
 	if(level == 1)
 	{
-		f = fopen("level1.txt","rt");
+		//f = fopen("level1.txt","rt");
+		f = fopen("ans1.txt","rt");
 	}
 	else if(level == 2)
 	{
@@ -111,6 +146,8 @@ void get_data()
 	{
 		f = fopen("level3.txt","rt");
 	}
+		
+
 	char buf[100] = {0};
 	while(!feof(f))
 	{
@@ -120,6 +157,7 @@ void get_data()
 		
 	}
 }
+
 int full()
 {
 	for(int i = 0;i<SZ;i++)
@@ -132,6 +170,7 @@ int full()
 	}
 	return 1;
 }
+
 int checkRange(int row, int col, int num)
 {
 	if(row<1 || row>9)
@@ -153,21 +192,6 @@ int checkRange(int row, int col, int num)
 	return 0;
 }
 
-int isItCorrect()
-{
-	for(int i =0;i<SZ;i++)
-	{
-		for(int j =0;j<SZ;j++)
-		{
-			if(sudoku[i][j] != array[i][j])
-			{
-				return 0;
-			}
-		}
-	}
-	return 1;
-}
-
 void getNumber()
 {
 	int num=0,col=0,row=0;
@@ -175,7 +199,6 @@ void getNumber()
 	{
 		if(full() == 1)
 		{
-			showSolution();
 			int cor_ret = isItCorrect();
 			if(cor_ret == 1)
 			{
@@ -186,9 +209,11 @@ void getNumber()
 				printf(WHITE "YOUR ANSWER IS WRONG\n");
 			}
 			return;
+
 		}
 		printf(WHITE "row, column, num : ");
-		scanf(WHITE "%d %d %d\n",&row,&col,&num);
+		scanf("%d %d %d\n",&row,&col,&num);
+
 		int ret = checkRange(row,col,num);
 		if(ret == 1)
 		{
