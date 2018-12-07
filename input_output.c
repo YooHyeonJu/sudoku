@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include "hj_header.h"
+#include "alheader.h"
 
 #define SZ 9
 
@@ -10,8 +11,10 @@
 #define BLUE	"\x1b[34m"	// 2
 
 
-int array[SZ][SZ];
+int sudoku[SZ][SZ];
 int color[SZ][SZ];
+
+extern readOnlySudoku[SZ][SZ];
 
 int checkHorizontal(int _data, int _row,int _col)
 {
@@ -190,7 +193,7 @@ void getNumber()
 
 		if(array[row][col] !=0)
 		{
-			printf("Number is already exist!!\n");
+			printf(RED "Number is already exist!!\n");
 			continue;
 		}
 		else
@@ -211,14 +214,3 @@ void getNumber()
 	}
 }
 
-/*
-int main(void)
-{
-	get_data();
-	showSolution();
-	getNumber();
-
-	return 0;
-}
-
-*/
