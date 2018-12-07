@@ -4,21 +4,6 @@
 #include "alheader.h"
 
 void solveSudoku(int _r, int _c);
-/*
-int sudoku[SZ][SZ] =
-{
- 2,0,5,0,0,7,0,0,6,
- 4,0,0,9,6,0,0,2,0,
- 0,0,0,0,8,0,0,4,5,
- 9,8,0,0,7,4,0,0,0,
- 5,7,0,8,0,2,0,6,9,
- 0,0,0,6,3,0,0,5,7,
- 7,5,0,0,2,0,0,0,0,
- 0,6,0,0,5,1,0,0,2,
- 3,0,0,4,0,0,5,0,8
-};
-//after change
-*/
 
 int readOnlySudoku[SZ][SZ];
 int solutionCnt = 0;
@@ -107,7 +92,6 @@ void solveSudoku(int _r, int _c)
  if(sudoku[_r][_c] > 0)
  {
   checkNext(_r, _c);
-  //return 0;
  }
  else
  {
@@ -122,13 +106,3 @@ void solveSudoku(int _r, int _c)
   }
  }
 }
-
-
-/*
-int main(void)
-{
- initReadOnlySudoku();
- solveSudoku(0, 0);
- return 0;
-}
-*/
