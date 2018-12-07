@@ -44,9 +44,7 @@ void printSolution(void)
 }
 
 
-
-//int checkalreadyUDLR(int _r, int _c, int _value)
-int isOK (int _r, int _c, int _value)
+int isOKUD (int _r, int _c, int _value)
 {
  for (int i=0; i<SZ; i++)
  {
@@ -54,50 +52,36 @@ int isOK (int _r, int _c, int _value)
 	{
 	 return 0;
 	}
- }
+ }return 1;
+}
+
+int isOKLR(int _r, int _c, int _value)
+{
  for (int i=0; i<SZ; i++)
  {
 	if(sudoku[_r][i] == _value && i != _c)
 	{
 	 return 0;
 	}
- }
-  int region_row = _r/3;
- int region_col = _c/3;
-
- for (int i = region_row*3; i<= region_row*3+2; i++)
- {
-        for(int j = region_col*3; j<=region_col*3+2; j++)
-        {
-         if(sudoku[i][j] == _value && i != _r && j != _c)
-         {
-                return 0;
-         }
-        }
- }
- return 1;
-
+ }return 1;
 }
 
-/*
-void checkalreadySquare(int _r, int _c, int _value)
+int isOKregion(int _r, int _c, int _value)
 {
  int region_row = _r/3;
  int region_col = _c/3;
 
  for (int i = region_row*3; i<= region_row*3+2; i++)
  {
-	for(int j = region_col*3; j<=region*3+2; j++)
+	for(int j = region_col*3; j<=region_col*3+2; j++)
 	{
 	 if(sudoku[i][j] == _value && i != _r && j != _c)
 	 {
 		return 0;
 	 }
 	}
- }
- return 1;
+ }return 1;
 }
-*/
 
 
 void checkNext(int _r, int _c)
@@ -130,7 +114,7 @@ void solveSudoku(int _r, int _c)
   for(int i=1; i<=9; i++)
   {
    memcpy(&sudoku[_r][_c], &readOnlySudoku[_r][_c], sizeof(int)*SZ*SZ - sizeof(int)*(_r*SZ+_c));
-   if ( isOK (_r, _c, i) == 1)
+   if ( isOKUD(_r, _c, i) == 1 && isOKLR(_r, _c, i) == 1 && isOKregion(_r, _c, i))
    {
 	sudoku[_r][_c] = i;
 	checkNext(_r, _c);
@@ -138,10 +122,13 @@ void solveSudoku(int _r, int _c)
   }
  }
 }
+
+
 /*
 int main(void)
 {
  initReadOnlySudoku();
  solveSudoku(0, 0);
  return 0;
-}*/
+}
+*/
