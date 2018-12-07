@@ -10,14 +10,18 @@ void solveSudoku(int _r, int _c);
 int readOnlySudoku[SZ][SZ];
 int solutionCnt = 0;
 
+int answer[SZ][SZ];
+
 void initReadOnlySudoku(void)
 {
  memcpy(&readOnlySudoku, sudoku, SZ*SZ*sizeof(int));
 }
+
+
 void printSolution(void)
 {
  solutionCnt++;
- printf("----This is Solution # %d ---\n", solutionCnt);
+ printf("--This is Solution # %d--\n", solutionCnt);
  for(int i=0; i<SZ; i++)
  {
   for(int j=0; j<SZ; j++)
@@ -26,6 +30,8 @@ void printSolution(void)
   } printf("\n");
  }
 }
+
+
 int isOKUD (int _r, int _c, int _value)
 {
  for (int i=0; i<SZ; i++)
@@ -46,6 +52,8 @@ int isOKLR(int _r, int _c, int _value)
    }
  }return 1;
 }
+
+
 int isOKregion(int _r, int _c, int _value)
 {
  int region_row = _r/3;
@@ -61,11 +69,14 @@ int isOKregion(int _r, int _c, int _value)
    }
  }return 1;
 }
+
+
 void checkNext(int _r, int _c)
 {
  if(_r == (SZ-1) && _c == (SZ-1))
  {
   printSolution();
+  memcpy(answer,sudoku,sizeof(int)*SZ*SZ);
   return;
  } _c++;
  if(_c == SZ)
@@ -75,6 +86,8 @@ void checkNext(int _r, int _c)
  }
  solveSudoku(_r, _c);
 }
+
+
 void solveSudoku(int _r, int _c)
 {
  if(sudoku[_r][_c] > 0)
@@ -88,8 +101,8 @@ void solveSudoku(int _r, int _c)
    memcpy(&sudoku[_r][_c], &readOnlySudoku[_r][_c], sizeof(int)*SZ*SZ - sizeof(int)*(_r*SZ+_c));
    if ( isOKUD(_r, _c, i) == 1 && isOKLR(_r, _c, i) == 1 && isOKregion(_r, _c, i))
    {
-   sudoku[_r][_c] = i;
-   checkNext(_r, _c);
+     sudoku[_r][_c] = i;
+     checkNext(_r, _c);
    }
   }
  }
