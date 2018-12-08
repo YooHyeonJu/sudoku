@@ -124,7 +124,6 @@ void get_data()
 	if(level == 1)
 	{
 		f = fopen("level1.txt","rt");
-		//f = fopen("ans1.txt","rt");
 	}
 	else if(level == 2)
 	{
@@ -161,7 +160,6 @@ int full()
 
 int checkRange(int row, int col, int num)
 {
-	printf("num 3\n");
 	if(row<1 || row>9)
 	{
 		printf(RED "ROW" WHITE" is out of range!!\n\n");
@@ -201,18 +199,15 @@ void getNumber()
 
 		}
 		printf(WHITE "row, column, num : ");
-		scanf("%d %d %d\n",&_row,&_col,&_num);
+		scanf("%d %d %d",&_row,&_col,&_num);
 		printf("result is like this : %d %d %d\n",_row,_col,_num);
 
-		printf("num 1\n");
 
 		int ret = checkRange(_row,_col,_num);
 		if(ret == 1)
 		{
 			continue;
 		}
-
-		printf("num 2\n");
 
 		_row-=1; _col-=1;
 		if(array[_row][_col] !=0)
@@ -223,19 +218,16 @@ void getNumber()
 		else
 		{
 
-			printf("num 4\n");
 			int ret1 = checkHorizontal(_num,_row,_col);
 			int ret2 = checkVertical(_num,_row,_col);
 			int ret3 = checkSquare(_num,_row,_col);
 			
 
-			printf("num 5\n");
 			if(ret1 == 0 && ret2 == 0 && ret3 == 0)
 			{
 				array[_row][_col]=_num;
 			}
 		}		
-		printf("num 6\n");		
 		showSolution();
 		memset(color,0,sizeof(int)*SZ*SZ);
 	}
