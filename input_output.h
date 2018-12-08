@@ -4,6 +4,7 @@
 int checkHorizontal(int _data, int _row,int _col);
 int checkVertical(int _data, int _row,int _col);
 int checkSquare(int _data, int _row, int _col);
+int isItCorrect();
 void showSolution();
 void putNum2Array(char *buf,int _row);
 void get_data();

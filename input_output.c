@@ -15,18 +15,6 @@ int sudoku[SZ][SZ];
 int array[SZ][SZ];
 int color[SZ][SZ];
 
-void show()
-{
-	for(int i=0;i<SZ;i++)
-	{
-		for(int j =0;j<SZ;j++)
-		{
-			printf("%d ",answer[i][j]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-}
 
 int checkHorizontal(int _data, int _row,int _col)
 {
@@ -135,8 +123,7 @@ void get_data()
 	FILE *f = 0;
 	if(level == 1)
 	{
-		//f = fopen("level1.txt","rt");
-		f = fopen("ans1.txt","rt");
+		f = fopen("level1.txt","rt");
 	}
 	else if(level == 2)
 	{
@@ -183,7 +170,7 @@ int checkRange(int row, int col, int num)
 		printf(RED "COL" WHITE" is out of range!!\n\n");
 		return 1;
 	}
-	if(num<1 || num>9)
+	if(num<0 || num>9)
 	{
 		printf(RED "NUMBER" WHITE" is out of range!!\n\n");
 		return 1;
@@ -194,7 +181,7 @@ int checkRange(int row, int col, int num)
 
 void getNumber()
 {
-	int num=0,col=0,row=0;
+	volatile int _num=0,_col=0,_row=0;
 	while(1)
 	{
 		if(full() == 1)
@@ -212,32 +199,35 @@ void getNumber()
 
 		}
 		printf(WHITE "row, column, num : ");
-		scanf("%d %d %d\n",&row,&col,&num);
+		scanf("%d %d %d",&_row,&_col,&_num);
+		printf("result is like this : %d %d %d\n",_row,_col,_num);
 
-		int ret = checkRange(row,col,num);
+
+		int ret = checkRange(_row,_col,_num);
 		if(ret == 1)
 		{
 			continue;
 		}
-		row-=1; col-=1;
-		if(array[row][col] !=0)
+
+		_row-=1; _col-=1;
+		if(array[_row][_col] !=0)
 		{
 			printf(RED "Number is already exist!!\n");
 			continue;
 		}
 		else
 		{
-			int ret1 = checkHorizontal(num,row,col);
-			int ret2 = checkVertical(num,row,col);
-			int ret3 = checkSquare(num,row,col);
+
+			int ret1 = checkHorizontal(_num,_row,_col);
+			int ret2 = checkVertical(_num,_row,_col);
+			int ret3 = checkSquare(_num,_row,_col);
 			
+
 			if(ret1 == 0 && ret2 == 0 && ret3 == 0)
 			{
-				array[row][col]=num;
+				array[_row][_col]=_num;
 			}
-		}
-		
-		
+		}		
 		showSolution();
 		memset(color,0,sizeof(int)*SZ*SZ);
 	}
