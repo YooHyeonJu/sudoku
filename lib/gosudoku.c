@@ -75,7 +75,7 @@ void checkNext(int _r, int _c)
 {
  if(_r == (SZ-1) && _c == (SZ-1))
  {
-  printSolution();
+  //printSolution();
   memcpy(answer,sudoku,sizeof(int)*SZ*SZ);
   return;
  } _c++;
