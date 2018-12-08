@@ -10,10 +10,13 @@ void solveSudoku(int _r, int _c);
 int readOnlySudoku[SZ][SZ];
 int solutionCnt = 0;
 
+int answer[SZ][SZ];
+
 void initReadOnlySudoku(void)
 {
  memcpy(&readOnlySudoku, sudoku, SZ*SZ*sizeof(int));
 }
+
 
 void printSolution(void)
 {
@@ -72,7 +75,8 @@ void checkNext(int _r, int _c)
 {
  if(_r == (SZ-1) && _c == (SZ-1))
  {
-  //printSolution();
+  printSolution();
+  memcpy(answer,sudoku,sizeof(int)*SZ*SZ);
   return;
  } _c++;
  if(_c == SZ)
