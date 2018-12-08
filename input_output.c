@@ -183,7 +183,7 @@ int checkRange(int row, int col, int num)
 		printf(RED "COL" WHITE" is out of range!!\n\n");
 		return 1;
 	}
-	if(num<1 || num>9)
+	if(num<0 || num>9)
 	{
 		printf(RED "NUMBER" WHITE" is out of range!!\n\n");
 		return 1;
