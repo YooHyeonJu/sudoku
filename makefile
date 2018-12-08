@@ -1,10 +1,14 @@
-exe_sudoku : sudoku.o input_output.o gosudoku.o
-	gcc -o exe_sudoku sudoku.o input_output.o gosudoku.o
+CC = gcc
+CFLAGS = -W -Wall
+OBJECTS = sudoku.o
+TARGET = exe_sudoku
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+$(TARGET) : $(OBJECTS)
+	$(CC) -o $(TARGET) -L../lib $(OBJECTS) -lsource
+
+sudoku.o : sudoku.c
+	$(CC) $(CFLAGS) -c -I../header sudoku.c -o sudoku.o
 
 clean:
-	rm -f input_output exe exe_sudoku
-	rm -f *.o 
-	rm -f libfuncs.a
+	rm -f $(TARGET) $(OBJECTS)
+
