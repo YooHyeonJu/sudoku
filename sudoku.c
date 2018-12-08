@@ -8,15 +8,14 @@
 
 #define SZ 9
 
-//extern int sudoku[SZ][SZ];
 //extern int color[SZ][SZ];
 //extern int readOnlySudoku[SZ][SZ];
 
+//extern int answer[SZ][SZ];
+//extern int sudoku[SZ][SZ];
 
 #define WHITE	"\x1b[0m"	// 0
 #define RED	"\x1b[31m"	// 1
-#define BLUE	"\x1b[34m"	// 2
-
 
 
 int main(void)
@@ -29,6 +28,7 @@ int main(void)
 	solveSudoku(0, 0);
 
 	showSolution();
+
 	getNumber();
 	//showSolution();
 
