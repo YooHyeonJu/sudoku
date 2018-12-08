@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -W -WALL
 OBJECTS = gosudoku.o input_output.o
-TARGET = libfuncs.a
+TARGET = libsource.a
 
 $(TARGET) : $(OBJECTS)
 	ar rscv $(TARGET) $(OBJECTS)
