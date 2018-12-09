@@ -217,13 +217,18 @@ void getNumber()
 		}
 		else
 		{
+			if(_num !=0)
+			{
+				int ret1 = checkHorizontal(_num,_row,_col);
+				int ret2 = checkVertical(_num,_row,_col);
+				int ret3 = checkSquare(_num,_row,_col);			
 
-			int ret1 = checkHorizontal(_num,_row,_col);
-			int ret2 = checkVertical(_num,_row,_col);
-			int ret3 = checkSquare(_num,_row,_col);
-			
-
-			if(ret1 == 0 && ret2 == 0 && ret3 == 0)
+				if(ret1 == 0 && ret2 == 0 && ret3 == 0)
+				{
+					array[_row][_col]=_num;
+				}
+			}
+			else
 			{
 				array[_row][_col]=_num;
 			}
