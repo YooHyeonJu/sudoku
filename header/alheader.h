@@ -1,5 +1,7 @@
 #ifdef ALHEADER_H
 #define ALHEADER_H
+extern void solveSudoku(int _r, int _c);
+extern void initReadOnlySudoku(void);
 
 void solveSudoku(int _r, int _c);
 void initReadOnlySudoku(void);
