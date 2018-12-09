@@ -10,6 +10,7 @@
 #define RED	"\x1b[31m"	// 1
 
 extern int answer[SZ][SZ];
+extern int readOnlySudoku[SZ][SZ];
 
 int sudoku[SZ][SZ];
 int array[SZ][SZ];
@@ -209,7 +210,7 @@ void getNumber()
 		}
 
 		_row-=1; _col-=1;
-		if(array[_row][_col] !=0)
+		if(readOnlySudoku[_row][_col] !=0)
 		{
 			printf(RED "Number is already exist!!\n");
 			continue;
