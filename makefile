@@ -1,24 +1,15 @@
-CC = gcc
-CFLAGS = -W -Wall
-
-OBJECTS = sudoku.o
-TARGET = exe_sudoku
-SUB_DIR = lib 
-
+DIRS = lib main
 .PHONY : all clean
 
--include /lib/makefile
-SUB_DIR :
-	cd lib; make
-
-exe_sudoku : sudoku.o
-	gcc -o -W -Wall -L./lib sudoku.o -lsource
-
-sudoku.o : sudoku.c
-	gcc -W -Wall -c -I./header sudoku.c -o sudoku.o
-
+all :
+	@for d in $(DIRS);\
+	do \
+		$(MAKE) -C $$d;\
+	done
 
 clean:
-	cd lib; make clean	
-	rm *.o exe_sudoku
-	
+	@for d in $(DIRS);\
+	do \
+		$(MAKE) -C $$d clean;\
+	done
+
