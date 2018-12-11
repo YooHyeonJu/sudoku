@@ -4,16 +4,25 @@
 주된 소스 : gosudoku.c(정답 알고리즘), input_outpu.c(게임의 입출력), sudoku.c(실행파일 진행)
 
 -기능
+
 	스도쿠의 region과 가로세로에 입력하는 숫자와 중복되는 숫자 있는지 확인하는 기능(정답 알고리즘 : isOKUD, isOKLR, isOKregion, 사용자 입력 : checkHorizontal, checkVertical, checkSquare)
+
 	스도쿠의 판이 주어지면 backTracking 알고리즘을 사용하여 정답을 구하는 기능(정답 알고리즘 : solveSudoku, checkNext)
+
 	스도쿠 판에 사용자의 입력을 받아 게임이 진행될 수 있도록 하는 기능(사용자 입력 : getNumber)
 
 -비기능
+
 	난이도별 스도쿠 판 텍스트 파일을 읽어오는 기능(사용자 입력 : get_data, putNum2Array)
+
 	0, 1~9 의 범위를 벗어나는 숫자 입력시 경고메세지 출력 기능(사용자 입력 : checkRange)
+
 	스도쿠 중 가로, 세로, region의 이미 있는 값과 중복되는 숫자를 넣었을 때, 오류메세지 출력과 함께 중복되는 숫자의 위치를 빨간색으로 출력하는 기능(사용자 입력 : checkHorizontal, checkVertical, checkSquare, showSolution)
+
 	원래 스도쿠판에 있던 숫자 자리에 입력시 경고 메시지 출력 기능(사용자 입력 : getNumber)
+
 	0을 입력하도록 하여 사용자가 입력한 숫자를 지우는 기능(사용자 입력 : getNumber)
+
 	스도쿠 성공시 성공 메시지 및 답안지 출력 기능(사용자 입력 : isItCorrect, full)
 
 
